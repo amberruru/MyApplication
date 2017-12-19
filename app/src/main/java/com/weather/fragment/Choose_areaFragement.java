@@ -17,7 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.myapplication.R;
-import com.weather.activity.WeahterActivity;
+import com.weather.activity.MainActivity;
+import com.weather.activity.WeatherActivity;
 import com.weather.db.City;
 import com.weather.db.County;
 import com.weather.db.Province;
@@ -96,10 +97,17 @@ public class Choose_areaFragement extends Fragment {
                     queryCounty();
                 }else if (currentLevel == LEVEL_COUNTY){
                     String weatherId = countyList.get(position).getWeatherId();
-                    Intent intent = new Intent(getActivity(), WeahterActivity.class);
-                    intent.putExtra("weather_id",weatherId);
-                    startActivity(intent);
-                    getActivity().finish();
+                    if (getActivity() instanceof MainActivity) {
+                        Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                        intent.putExtra("weather_id", weatherId);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }else if (getActivity() instanceof WeatherActivity){
+                        WeatherActivity weatherActivity = (WeatherActivity) getActivity();
+                        weatherActivity.drawerLayout.closeDrawers();
+                        weatherActivity.swipeRefreshLayout.setRefreshing(true);
+                        weatherActivity.requestWeahter(weatherId);
+                    }
                 }
             }
         });
