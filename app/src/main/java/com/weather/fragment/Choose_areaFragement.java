@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
@@ -48,11 +51,12 @@ public class Choose_areaFragement extends Fragment {
 
     private ProgressDialog progressDialog;
 
-    private TextView titileText;
-
-    private Button button;
-
-    private ListView listView;
+    @BindView(R.id.title_text)
+    TextView titileText;
+    @BindView(R.id.back_button)
+    Button button;
+    @BindView(R.id.list_view)
+    ListView listView;
 
     private ArrayAdapter<String> adapter;
 
@@ -75,9 +79,7 @@ public class Choose_areaFragement extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.choose_area,container,false);
-        titileText = (TextView) view.findViewById(R.id.title_text);
-        button = (Button) view.findViewById(R.id.back_button);
-        listView = (ListView) view.findViewById(R.id.list_view);
+        ButterKnife.bind(this,view);
         adapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,dataList);
         listView.setAdapter(adapter);
         return view;

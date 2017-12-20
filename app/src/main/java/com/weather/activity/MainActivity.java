@@ -8,6 +8,8 @@ import android.os.Bundle;
 
 import com.example.administrator.myapplication.R;
 
+import butterknife.ButterKnife;
+
 public class MainActivity extends FragmentActivity {
 
     @Override

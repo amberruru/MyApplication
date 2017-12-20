@@ -30,6 +30,7 @@ import com.weather.util.Utility;
 import java.io.IOException;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -38,33 +39,33 @@ import okhttp3.Response;
 public class WeatherActivity extends AppCompatActivity {
 
     @BindView(R.id.weather_layout)
-    private ScrollView weahterLayout;
+    ScrollView weahterLayout;
     @BindView(R.id.title_city)
-    private TextView titleCity;
+    TextView titleCity;
     @BindView(R.id.title_update_time)
-    private TextView titleUpdateTime;
+    TextView titleUpdateTime;
     @BindView(R.id.degree_text)
-    private TextView degreeText;
+    TextView degreeText;
     @BindView(R.id.weather_info_text)
-    private TextView weatherInfoText;
+    TextView weatherInfoText;
     @BindView(R.id.forecast_layout)
-    private LinearLayout forecastLayout;
+    LinearLayout forecastLayout;
     @BindView(R.id.aqi_text)
-    private TextView aqiText;
+    TextView aqiText;
     @BindView(R.id.pm25_text)
-    private TextView pm25Text;
+    TextView pm25Text;
     @BindView(R.id.comfort_text)
-    private TextView comfortText;
+    TextView comfortText;
     @BindView(R.id.car_wash_text)
-    private TextView carWashText;
+    TextView carWashText;
     @BindView(R.id.sport_text)
-    private TextView sportText;
+    TextView sportText;
     @BindView(R.id.bing_img)
-    private ImageView imageView;
+    ImageView imageView;
     @BindView(R.id.swipe_refresh)
     public SwipeRefreshLayout swipeRefreshLayout;//下拉刷新
     @BindView(R.id.nav_btn)
-    private Button navBtn;//更换地址
+    Button navBtn;//更换地址
     @BindView(R.id.drawer_layout)
     public DrawerLayout drawerLayout;
 
@@ -72,6 +73,7 @@ public class WeatherActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weahter);
+        ButterKnife.bind(this);
         //激活定时更新
         Intent intent = new Intent(this, AutoUpdateService.class);
         startService(intent);
@@ -103,10 +105,11 @@ public class WeatherActivity extends AppCompatActivity {
         });
         //背景图
          loadBingImg();
-        //换地址
+
 
     }
 
+    //换地址
     @OnClick(R.id.nav_btn)
     public void change_area(){
         drawerLayout.openDrawer(Gravity.START);

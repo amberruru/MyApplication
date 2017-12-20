@@ -50,7 +50,7 @@ public class AutoUpdateService extends Service {
         if (null != weather){
             Weather weather1 = Utility.handleWeahterResponse(weather);
             String weatherId = weather1.basic.weatherId;
-            String url = "hppt://guolin.tech/api/weather?cityid="+weatherId+"&key=e1059b2eaec64cab9e37bed6bec776d6";
+            String url = "http://guolin.tech/api/weather?cityid="+weatherId+"&key=e1059b2eaec64cab9e37bed6bec776d6";
             HttpUtil.sendOkHttpRequest(url, new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
@@ -65,8 +65,6 @@ public class AutoUpdateService extends Service {
                         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(AutoUpdateService.this).edit();
                         editor.putString("weather",responseText);
                         editor.apply();
-                        Toast.makeText(AutoUpdateService.this,"定时更新天气完成",
-                                Toast.LENGTH_SHORT).show();
                     }
                 }
             });
