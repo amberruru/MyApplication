@@ -34,6 +34,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
@@ -113,17 +114,16 @@ public class Choose_areaFragement extends Fragment {
                 }
             }
         });
-        button.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                if (currentLevel==LEVEL_COUNTY){
-                    queryCity();
-                }else if (currentLevel==LEVEL_CITY){
-                    queryProvinces();
-                }
-            }
-        });
         queryProvinces();
+    }
+
+    @OnClick(R.id.back_button)
+    public void onClick(View view){
+        if (currentLevel==LEVEL_COUNTY){
+            queryCity();
+        }else if (currentLevel==LEVEL_CITY){
+            queryProvinces();
+        }
     }
 
     private void queryProvinces(){
